@@ -10,11 +10,21 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  response.render('pages/index');
+  response.set('X-Action-Name', 'HTML').send('<html>\
+    <head>\
+      <title>Sample HTML</title>\
+    </head>\
+    <body>\
+      <div class="header">\
+        <h1 class="box">What\'s happening?</h1>\
+      </div>\
+      <p>Timestamp : ' + Date.now() + '</p>\
+    </body>\
+  </html>');
 });
 
 app.get('/json', function(request, response) {
-  response.json({
+  response.set('X-Action-Name', 'JSON').json({
     "handle" : "@irfan3",
     "name" :
       {
